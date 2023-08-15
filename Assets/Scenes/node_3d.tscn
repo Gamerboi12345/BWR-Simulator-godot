@@ -13734,7 +13734,7 @@ outline_size = 0
 
 [node name="ThermalText" type="Label3D" parent="Control Room Panels/Main Panel Center/Meters/Thermal Power/CSGBox3D"]
 unique_name_in_owner = true
-transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 0.0141935, -0.010524, -0.00165367)
+transform = Transform3D(-8.9407e-08, 0, 1, 0, 1, 0, -1, 0, -8.9407e-08, 0.0141926, -0.010524, 0.132281)
 sorting_offset = 1.0
 pixel_size = 0.0004
 modulate = Color(0.964706, 0, 0, 1)
