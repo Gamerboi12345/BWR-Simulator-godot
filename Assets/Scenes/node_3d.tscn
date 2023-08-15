@@ -1,4 +1,4 @@
-[gd_scene load_steps=441 format=3 uid="uid://bn517fmhqrg3k"]
+[gd_scene load_steps=443 format=3 uid="uid://bn517fmhqrg3k"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Main.gd" id="1_eg7xd"]
 [ext_resource type="PackedScene" uid="uid://7gv6q50fuutj" path="res://Scenes/Player/player.tscn" id="1_eisjc"]
@@ -37,6 +37,7 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Rod Control/Rod Position Monitors.gd" id="34_1sml7"]
 [ext_resource type="Material" uid="uid://c2raag84b6lqd" path="res://Assets/Materials/black metal.tres" id="35_r1uh5"]
 [ext_resource type="Texture2D" uid="uid://cq75n3t4d1mx4" path="res://Assets/Textures/Vertical Meter Background.png" id="36_4fyjx"]
+[ext_resource type="Script" path="res://Assets/Scripts/Reactor/Physics.gd" id="36_a8y7i"]
 [ext_resource type="Script" path="res://Assets/Scripts/Annunciators/Reactor Annunciators.gd" id="36_sdnxh"]
 [ext_resource type="Script" path="res://Assets/Scripts/RWM/RWM.gd" id="37_c3x1v"]
 [ext_resource type="Texture2D" uid="uid://ccx5ox8xjidwh" path="res://Assets/Textures/Vertical Meter Pointer.png" id="37_l1t2u"]
@@ -45,6 +46,7 @@
 [ext_resource type="Script" path="res://Assets/Scripts/RWM/RWM Bypass Key Switch.gd" id="40_x7o7m"]
 [ext_resource type="Script" path="res://Assets/Scripts/Neutron Monitoring/RBM Meters.gd" id="41_dwscw"]
 [ext_resource type="Script" path="res://Assets/Scripts/Misc/Clock Text.gd" id="45_ifyrx"]
+[ext_resource type="Script" path="res://Assets/Scripts/Misc/Thermal Text.gd" id="48_sjypr"]
 [ext_resource type="Texture2D" uid="uid://00yvkya2csl6" path="res://Assets/Textures/reference diagrams/ML18041A0162.png" id="50_yf40r"]
 [ext_resource type="Texture2D" uid="uid://bcsu84r2hm3o8" path="res://Assets/Textures/reference diagrams/ML18041A01621.png" id="51_2cwqw"]
 [ext_resource type="Material" uid="uid://c7gnnnjikio6v" path="res://Assets/Materials/red plastic.tres" id="54_42qy7"]
@@ -9775,6 +9777,7 @@ line_spacing = -2.0
 
 [node name="Full Core Display" type="Node3D" parent="Control Room Panels/Main Panel Center"]
 transform = Transform3D(0, 0, -0.75, 0, 0.75, 0, 0.75, 0, 0, 1.00228, 1.1063, -2.40535)
+script = ExtResource("36_a8y7i")
 
 [node name="full core display lights" parent="Control Room Panels/Main Panel Center/Full Core Display" instance=ExtResource("7_5ybks")]
 transform = Transform3D(-1.77636e-15, 1.78814e-07, -1.1, 1.1, -4.80825e-08, -5.73188e-15, -4.80825e-08, -1.1, -1.78814e-07, -0.481903, -0.141908, -0.272004)
@@ -13729,7 +13732,8 @@ font = ExtResource("14_3lqpq")
 font_size = 164
 outline_size = 0
 
-[node name="Text" type="Label3D" parent="Control Room Panels/Main Panel Center/Meters/Thermal Power/CSGBox3D"]
+[node name="ThermalText" type="Label3D" parent="Control Room Panels/Main Panel Center/Meters/Thermal Power/CSGBox3D"]
+unique_name_in_owner = true
 transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 0.0141935, -0.010524, -0.00165367)
 sorting_offset = 1.0
 pixel_size = 0.0004
@@ -13738,6 +13742,8 @@ text = "0000.0"
 font = ExtResource("14_3lqpq")
 font_size = 164
 outline_size = 0
+horizontal_alignment = 0
+script = ExtResource("48_sjypr")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Control Room Panels/Main Panel Center/Meters/Thermal Power"]
 transform = Transform3D(-8.9407e-08, 0, 1, 0, 0.999999, 0, -1, 0, -8.9407e-08, 0.010787, -0.0853788, -0.000441551)
@@ -13847,6 +13853,9 @@ autostart = true
 [node name="Main Loop Timer Fast" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
+
+[node name="Reactor" type="Node3D" parent="."]
+script = ExtResource("36_a8y7i")
 
 [connection signal="input_event" from="Control Room Panels/Main Panel Left Side/Electrical Panel/control_room_normal_lighting/StaticBody3D" to="Control Room Panels/Main Panel Left Side/Electrical Panel/control_room_normal_lighting/StaticBody3D" method="breaker_switch_position_up"]
 [connection signal="input_event" from="Control Room Panels/Main Panel Left Side/Electrical Panel/control_room_normal_lighting/StaticBody3D2" to="Control Room Panels/Main Panel Left Side/Electrical Panel/control_room_normal_lighting/StaticBody3D" method="breaker_switch_position_down"]
